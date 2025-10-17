@@ -1,0 +1,16 @@
+services:
+  # Servicio para la base de datos PostgreSQL + pgvector
+  db:
+    image: pgvector/pgvector:pg16    
+    restart: unless-stopped    
+    volumes:
+      - ./.storage/postgres-data:/var/lib/postgresql/data
+      # Volumen para los scripts de inicialización
+      - ./.files/postgres/00_starter.sql:/docker-entrypoint-initdb.d/00_starter.sql
+    environment:
+      - POSTGRES_USER=${DB_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${DB_POSTGRES_PASSWORD}
+      - POSTGRES_DB=${DB_POSTGRES_DB}
+      - POSTGRES_PORT=${DB_POSTGRES_PORT}
+    ports:
+      - "${DB_POSTGRES_PORT}:5432"

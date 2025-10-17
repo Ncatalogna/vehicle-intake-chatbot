@@ -1,0 +1,27 @@
+# Dependencias para la API
+fastapi==0.118.2
+uvicorn[standard]==0.37.0
+sqlalchemy[asyncio]==2.0.43
+asyncpg==0.30.0
+alembic==1.17.0
+pydantic-settings==2.11.0
+logging==0.4.9.6
+psycopg2==2.9.11
+
+# Dependencias para el Chatbot
+streamlit==1.50.0
+requests==2.32.5
+httpx==0.28.1
+
+# Dependencias para la lógica de IA
+langchain==0.3.27
+langgraph==0.6.10
+langchain-core==0.3.79
+langchain_groq==0.3.8
+langchain-google-genai==2.1.12
+groq==0.32.0
+grandalf==0.8
+
+# Dependencias generales
+python-dotenv==1.1.1
+pydantic==2.12.0

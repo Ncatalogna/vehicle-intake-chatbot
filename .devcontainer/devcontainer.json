@@ -1,0 +1,35 @@
+{
+    "name": "Vehicle Intake Chatbot - Development Container",
+    
+    // Apunta al archivo docker-compose.local.yml en la carpeta raíz
+    "dockerComposeFile": [
+        "../docker-compose.yml",
+        "./docker-compose.local.yml"
+    ],
+
+    // Especifica que VS Code debe conectarse al servicio 'app'
+    "service": "app",
+    
+    // La carpeta de trabajo dentro del contenedor (debe coincidir con el volumen)
+    "workspaceFolder": "/workspace",
+
+    // Comandos para configurar el venv e instalar dependencias después de crear el contenedor
+    "postCreateCommand": "python3 -m venv .venv && .venv/bin/python -m pip install --upgrade pip && .venv/bin/python -m pip install -r requirements.txt",
+
+    // Personalizaciones para VS Code
+    "customizations": {
+        "vscode": {
+            "settings": {
+                // Asegura que VS Code use el intérprete del entorno virtual
+                "python.defaultInterpreterPath": "/workspace/.venv/bin/python"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "google.geminicodeassist",
+                "ms-ossdata.vscode-pgsql",
+                "humao.rest-client"
+            ]
+        }
+    }
+}

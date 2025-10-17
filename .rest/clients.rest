@@ -1,0 +1,65 @@
+### Variables
+# @name globals
+# URL base de la API. Ajusta el puerto si es necesario.
+@baseUrl = http://localhost:8000
+
+# Variable para almacenar el ID del cliente creado.
+@client_id = 
+
+###
+# -------------------------------------------------
+# PRUEBAS PARA EL CRUD DE CLIENTES
+# -------------------------------------------------
+
+### 1. Crear un nuevo cliente
+# @name createClient
+POST {{baseUrl}}/api/clients/
+Content-Type: application/json
+
+{
+  "name": "Juan",
+  "last_name": "Perez",
+  "birth_date": "1990-05-15",
+  "documento": "35123456",
+  "documento_type": "dni",
+  "email": "juan.perez@example.com",
+  "phone_number": "1122334455"
+}
+
+### 
+# Captura el ID del cliente creado para usarlo en las siguientes peticiones.
+@client_id = {{createClient.response.body.id}}
+
+###
+### 2. Obtener todos los clientes
+# @name getAllClients
+GET {{baseUrl}}/api/clients/
+Accept: application/json
+
+###
+### 3. Obtener un cliente por su ID
+# Utiliza el ID capturado en la petición de creación.
+# @name getClientById
+GET {{baseUrl}}/api/clients/{{client_id}}
+Accept: application/json
+
+###
+### 4. Actualizar un cliente existente
+# @name updateClient
+PUT {{baseUrl}}/api/clients/{{client_id}}
+Content-Type: application/json
+
+{
+  "name": "Juan Carlos",
+  "last_name": "Perez",
+  "birth_date": "1990-05-15",
+  "documento": "35123456",
+  "documento_type": "dni",
+  "email": "juan.c.perez@newdomain.com",
+  "phone_number": "555-9876"
+}
+
+###
+### 5. Eliminar un cliente
+# @name deleteClient
+DELETE {{baseUrl}}/api/clients/{{client_id}}

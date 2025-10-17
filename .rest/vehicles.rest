@@ -1,0 +1,43 @@
+### Variables
+# @name globals
+# URL base de la API.
+@baseUrl = http://localhost:8000
+
+# ID de un cliente existente para las pruebas.
+# NOTA: Debes ejecutar primero `clients.rest` y copiar aquí el UUID de un cliente creado.
+@client_id = 4de7dd13-d455-4bc2-8a96-3ea6e65d92ea
+
+###
+# -------------------------------------------------
+# PRUEBAS PARA EL CRUD DE VEHÍCULOS
+# -------------------------------------------------
+
+### 1. Crear un nuevo vehículo para un cliente
+# @name createVehicle
+POST {{baseUrl}}/api/vehicles/
+Content-Type: application/json
+
+{
+  "license_plate": "AB123CD",
+  "brand": "Ford",
+  "model": "Focus",
+  "year": 2018,
+  "mileage": 50000,
+  "client_id": "{{client_id}}"
+}
+
+###
+# Captura el ID del vehículo creado.
+@vehicle_id = {{createVehicle.response.body.id}}
+
+###
+### 2. Obtener un vehículo por su ID
+# @name getVehicleById
+GET {{baseUrl}}/api/vehicles/{{vehicle_id}}
+Accept: application/json
+
+###
+### 3. Obtener todos los vehículos de un cliente específico
+# @name getVehiclesForClient
+GET {{baseUrl}}/api/vehicles/client/{{client_id}}
+Accept: application/json
